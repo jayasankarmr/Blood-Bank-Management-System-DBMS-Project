@@ -1,0 +1,361 @@
+<!doctype html>
+{% extends "base.html" %}
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{%if messages%}
+    {%for mess in messages%}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+<strong>{{mess}}</strong>
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+</div>
+
+    {%endfor%}
+{%endif%}
+{% endwith %}
+
+     {% if session['logged_in'] == True %}
+
+     {%else%}
+
+     {%endif%}
+
+
+    <br>
+
+    <div class="card text-center">
+      <div class="card-header" style="font-size: 2rem; font-weight: bold;">Total Blood in Blood Bank</div>
+      <div class="card-body">
+        <div style="width: fit-content; margin: 20px auto 0; border-radius: 50px; padding: 10px 30px; background-color: white; color: black; border: 2px solid black;">
+          <h1 class="card-title font-weight-bold mb-0" style="font-size: 2.5rem;"><span class='numscroller' data-min='1' data-max='{{totalblood}}' data-delay='5' data-increment='10'>{{totalblood}}</span> Pints</h1>
+        </div>
+      </div>
+    </div>
+
+<br>
+
+
+
+        <div class="container">
+  <div class="row">
+    <div class="col"><div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+      <div class="card-header">A Positive</div>
+    <div class="card-body">
+      <h5 class="card-title"><span class='numscroller' data-min='1' data-max='{{bloodtypestotal.apos}}' data-delay='5' data-increment='10'>{{bloodtypestotal.apos}}</span> Pints</h5>
+    </div>
+  </div></div>
+    <div class="col"><div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+      <div class="card-header">A Negative</div>
+    <div class="card-body">
+      <h5 class="card-title"><span class="count"><span class='numscroller' data-min='1' data-max='{{bloodtypestotal.aneg}}' data-delay='5' data-increment='10'>{{bloodtypestotal.aneg}}</span></span> Pints</h5>
+    </div>
+    </div></div>
+    <div class="col"><div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+      <div class="card-header">B Positive</div>
+    <div class="card-body">
+      <h5 class="card-title"><span class='numscroller' data-min='1' data-max='{{bloodtypestotal.bpos}}' data-delay='5' data-increment='10'>{{bloodtypestotal.bpos}}</span> Pints</h5>
+    </div>
+    </div></div>
+    <div class="col"><div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+      <div class="card-header">B Negative</div>
+    <div class="card-body">
+      <h5 class="card-title"><span class='numscroller' data-min='1' data-max='{{bloodtypestotal.bneg}}' data-delay='5' data-increment='10'>{{bloodtypestotal.bneg}}</span> Pints</h5>
+      <p class="card-text"></p>
+    </div>
+    </div></div>
+
+    <div class="w-100"></div>
+
+    <div class="col"><div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+      <div class="card-header">AB Positive</div>
+    <div class="card-body">
+      <h5 class="card-title"><span class='numscroller' data-min='1' data-max='{{bloodtypestotal.abpos}}' data-delay='5' data-increment='10'>{{bloodtypestotal.abpos}}</span> Pints</h5>
+    </div>
+    </div></div>
+    <div class="col"><div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+      <div class="card-header">AB Negative</div>
+    <div class="card-body">
+      <h5 class="card-title"><span class="count"><span class='numscroller' data-min='1' data-max='{{bloodtypestotal.abneg}}' data-delay='5' data-increment='10'>{{bloodtypestotal.abneg}}</span></span> Pints</h5>
+    </div>
+    </div></div>
+    <div class="col"><div class="card bg-light mb-3" style="max-width: 18rem;">
+      <div class="card-header">O Positive</div>
+    <div class="card-body">
+      <h5 class="card-title"><span class="count"><span class='numscroller' data-min='1' data-max='{{bloodtypestotal.opos}}' data-delay='5' data-increment='10'>{{bloodtypestotal.opos}}</span></span> Pints</h5>
+    </div>
+    </div></div>
+    <div class="col"><div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+      <div class="card-header">O Negative</div>
+    <div class="card-body">
+      <h5 class="card-title"><span class="count"><span class='numscroller' data-min='1' data-max='{{bloodtypestotal.oneg}}' data-delay='5' data-increment='10'>{{bloodtypestotal.oneg}}</span></span> Pints</h5>
+    </div>
+    </div></div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header bg-danger text-white text-center" style="width: fit-content; margin: 20px auto 0; border-radius: 20px; padding: 10px 30px;">
+    <h4 class="mb-0">BLOOD DONATIONS AND THEIR DETAILS</h4>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover" style="border-radius: 15px; overflow: hidden;">
+        <thead class="bg-danger text-white">
+          <tr>
+            <th class="text-center">Donor Name</th>
+            <th class="text-center">Blood Group</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Gender</th>
+            <th class="text-center">Quantity</th>
+            <th class="text-center">Weight</th>
+            <th class="text-center">Phone</th>
+            <th class="text-center">Purchase Date</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in rows %}
+          <tr class="{% if loop.index is even %}" style="background-color: #f0f0f0;{% else %}table-white{% endif %}">
+            <td class="text-center">{{row["donorname"]}}</td>
+            <td class="text-center">{{row["type"]}}</td>
+            <td class="text-center">{{row["donoremail"]}}</td>
+            <td class="text-center">{{row['donorsex']}}</td>
+            <td class="text-center">{{row['qty']}} Pints</td>
+            <td class="text-center">{{row['dweight']}} Kg</td>
+            <td class="text-center">{{row['phone']}}</td>
+            <td class="text-center">
+              {{row['purchase_date']}}
+              {% if nearing_expiry[row['id']] %}
+              <span class="badge badge-warning" data-toggle="tooltip" data-placement="top" title="Blood about to expire">
+                <i class="fas fa-exclamation-triangle"></i>
+              </span>
+              {% endif %}
+            </td>
+            <td class="text-center">
+              <form action="{{url_for('editdonor',id=row['id'])}}" method="GET" style="display: inline;">
+                <input type="submit" class="btn btn-primary btn-sm" name="button" value="Edit"/>
+              </form>
+              <form action="{{url_for('deletebloodentry',id=row['id'])}}" method="GET" style="display: inline;">
+                <input type="submit" name="button" class="btn btn-danger btn-sm" value="Delete"/>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
+      <!-- Pagination Controls -->
+      {% if total_pages > 1 %}
+      <div class="d-flex justify-content-center mt-4">
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            {% if page > 1 %}
+            <li class="page-item">
+              <a class="page-link" href="{{ url_for('dashboard', page=page-1) }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            {% endif %}
+            
+            {% for p in range(1, total_pages + 1) %}
+            <li class="page-item {% if p == page %}active{% endif %}">
+              <a class="page-link" href="{{ url_for('dashboard', page=p) }}">{{ p }}</a>
+            </li>
+            {% endfor %}
+            
+            {% if page < total_pages %}
+            <li class="page-item">
+              <a class="page-link" href="{{ url_for('dashboard', page=page+1) }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header bg-danger text-white text-center" style="width: fit-content; margin: 20px auto 0; border-radius: 20px; padding: 10px 30px;">
+    <h4 class="mb-0">REGISTERED DONORS</h4>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover" style="border-radius: 15px; overflow: hidden;">
+        <thead class="bg-danger text-white">
+          <tr>
+            <th class="text-center">Name</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Blood Group</th>
+            <th class="text-center">Address</th>
+            <th class="text-center">City</th>
+            <th class="text-center">Pin Code</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr class="{% if loop.index is even %}" style="background-color: #f0f0f0;{% else %}table-white{% endif %}">
+            <td class="text-center">{{ user['name'] }}</td>
+            <td class="text-center">{{ user['email'] }}</td>
+            <td class="text-center">{{ user['bg'] }}</td>
+            <td class="text-center">{{ user['addr'] }}</td>
+            <td class="text-center">{{ user['city'] }}</td>
+            <td class="text-center">{{ user['pin'] }}</td>
+            <td class="text-center">
+              <form action="{{url_for('deleteuser', useremail=user['email'])}}" method="GET" style="display: inline;">
+                <input type="submit" name="button" class="btn btn-danger btn-sm" value="Delete"/>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
+      <!-- Pagination Controls for Registered Donors -->
+      {% if total_donor_pages > 1 %}
+      <div class="d-flex justify-content-center mt-4">
+        <nav aria-label="Registered Donors Page navigation">
+          <ul class="pagination">
+            {% if donor_page > 1 %}
+            <li class="page-item">
+              <a class="page-link" href="{{ url_for('dashboard', page=page, donor_page=donor_page-1) }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            {% endif %}
+            
+            {% for p in range(1, total_donor_pages + 1) %}
+            <li class="page-item {% if p == donor_page %}active{% endif %}">
+              <a class="page-link" href="{{ url_for('dashboard', page=page, donor_page=p) }}">{{ p }}</a>
+            </li>
+            {% endfor %}
+            
+            {% if donor_page < total_donor_pages %}
+            <li class="page-item">
+              <a class="page-link" href="{{ url_for('dashboard', page=page, donor_page=donor_page+1) }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header bg-primary text-white text-center" style="width: fit-content; margin: 20px auto 0; border-radius: 20px; padding: 10px 30px;">
+    <h4 class="mb-0">EXPIRED BLOOD ENTRIES</h4>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover" style="border-radius: 15px; overflow: hidden;">
+        <thead class="bg-primary text-white">
+          <tr>
+            <th class="text-center">Donor Name</th>
+            <th class="text-center">Blood Group</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Gender</th>
+            <th class="text-center">Quantity</th>
+            <th class="text-center">Weight</th>
+            <th class="text-center">Phone</th>
+            <th class="text-center">Purchase Date</th>
+            <th class="text-center">Expiry Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for entry in expired_entries %}
+          <tr class="{% if loop.index is even %}table-light{% else %}table-white{% endif %}">
+            <td class="text-center">{{entry["donorname"]}}</td>
+            <td class="text-center">{{entry["type"]}}</td>
+            <td class="text-center">{{entry["donoremail"]}}</td>
+            <td class="text-center">{{entry['donorsex']}}</td>
+            <td class="text-center">{{entry['qty']}} Pints</td>
+            <td class="text-center">{{entry['dweight']}} Kg</td>
+            <td class="text-center">{{entry['phone']}}</td>
+            <td class="text-center">{{entry['purchase_date']}}</td>
+            <td class="text-center">{{entry['expiry_date']}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
+      <!-- Pagination Controls for Expired Entries -->
+      {% if total_expired_pages > 1 %}
+      <div class="d-flex justify-content-center mt-4">
+        <nav aria-label="Expired Blood Entries Page navigation">
+          <ul class="pagination">
+            {% if expired_page > 1 %}
+            <li class="page-item">
+              <a class="page-link text-primary" href="{{ url_for('dashboard', page=page, donor_page=donor_page, expired_page=expired_page-1) }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            {% endif %}
+            
+            {% for p in range(1, total_expired_pages + 1) %}
+            <li class="page-item {% if p == expired_page %}active bg-primary{% endif %}">
+              <a class="page-link {% if p == expired_page %}bg-primary border-primary{% else %}text-primary{% endif %}" href="{{ url_for('dashboard', page=page, donor_page=donor_page, expired_page=p) }}">{{ p }}</a>
+            </li>
+            {% endfor %}
+            
+            {% if expired_page < total_expired_pages %}
+            <li class="page-item">
+              <a class="page-link text-primary" href="{{ url_for('dashboard', page=page, donor_page=donor_page, expired_page=expired_page+1) }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<br>
+
+<!-- Add Font Awesome for warning icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<!-- Initialize tooltips -->
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+
+<style>
+.badge-warning {
+  background-color: #ffc107;
+  color: #000;
+  margin-left: 5px;
+  padding: 5px;
+  font-size: 12px;
+}
+
+.badge-warning i {
+  font-size: 14px;
+}
+
+/* Add animation to warning icon */
+@keyframes warning-pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.badge-warning i {
+  animation: warning-pulse 1s infinite;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="hero-section position-relative" style="background-color: #002855; color: white; padding: 60px 0; overflow: hidden;">
+    <div class="container position-relative">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h1 class="display-4 mb-4">DONATING BLOOD</h1>
+                <p class="lead mb-5">Blood is made up of four main components. Red blood cells, platelets, plasma and white blood cells. Each whole blood donation has the potential to save up to three lives.</p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="https://www.google.com/search?client=safari&rls=en&q=blood+banks+near+me&ie=UTF-8&oe=UTF-8/locations" class="btn btn-light btn-lg mb-3">Find a Location Near You</a>
+                </div>
+            </div>
+            <div class="col-md-6 position-relative">
+                <!-- Empty space for new water drop design -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-heart text-danger mb-3" style="font-size: 2.5rem;"></i>
+                    <h3 class="card-title text-danger">BLOOD DONOR BASICS</h3>
+                    <p class="card-text">Learn about blood donation process and requirements for donors.</p>
+                    <a href="/donor-basics" class="btn btn-outline-danger">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-tint text-danger mb-3" style="font-size: 2.5rem;"></i>
+                    <h3 class="card-title text-danger">BLOOD TYPES</h3>
+                    <p class="card-text">Understand different blood types and their compatibility.</p>
+                    <a href="https://en.wikipedia.org/wiki/Blood_type" class="btn btn-outline-danger" target="_blank" rel="noopener noreferrer">Learn More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-question-circle text-danger mb-3" style="font-size: 2.5rem;"></i>
+                    <h3 class="card-title text-danger">ELIGIBILITY QUESTIONS</h3>
+                    <p class="card-text">Find out if you meet the requirements to donate blood.</p>
+                    <a href="https://www.redcrossblood.org/donate-blood/how-to-donate/eligibility-requirements.html" class="btn btn-outline-danger" target="_blank" rel="noopener noreferrer">Check Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+.hero-section {
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+    background-color: #002855;
+}
+
+.btn-light {
+    background-color: white;
+    color: #002855;
+    border: none;
+    margin-right: 10px;
+}
+
+.btn-light:hover {
+    background-color: #f8f9fa;
+    color: #001845;
+}
+
+.card {
+    transition: transform 0.3s;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    height: 320px;  /* Adjusted height */
+}
+
+.card-body {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.card-text {
+    margin: 1rem 0;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    line-height: 1.5;
+    min-height: 60px;
+}
+
+.btn-outline-danger {
+    padding: 0.5rem 1.5rem;
+    margin-top: 1rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.gap-3 {
+    gap: 1rem;
+}
+</style>
+
+{% endblock %}
+
+

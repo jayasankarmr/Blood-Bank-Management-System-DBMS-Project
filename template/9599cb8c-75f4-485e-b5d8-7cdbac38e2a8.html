@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center mb-4">
+            <h1 class="text-danger">Blood Donor Basics</h1>
+            <p class="lead">Learn about blood donation and how you can help save lives</p>
+        </div>
+        <div class="col-12 col-lg-8">
+            <div class="embed-responsive embed-responsive-16by9 shadow rounded">
+                <iframe class="embed-responsive-item" 
+                        src="https://www.youtube.com/embed/lFBE_Oqv20I" 
+                        title="Blood Donation Basics"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h3 class="text-danger mb-3">Why Donate Blood?</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">✓ One donation can save up to three lives</li>
+                        <li class="mb-2">✓ Blood is needed every two seconds</li>
+                        <li class="mb-2">✓ Safe and simple process</li>
+                        <li class="mb-2">✓ Helps patients of all ages</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h3 class="text-danger mb-3">What to Expect</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">✓ Registration and health history</li>
+                        <li class="mb-2">✓ Quick physical examination</li>
+                        <li class="mb-2">✓ The donation process (about 10 minutes)</li>
+                        <li class="mb-2">✓ Refreshments and recovery</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.card {
+    transition: transform 0.3s;
+    border: none;
+    margin-bottom: 20px;
+}
+.card:hover {
+    transform: translateY(-5px);
+}
+.embed-responsive {
+    border: none;
+}
+.card-body ul {
+    display: inline-block;
+    text-align: left;
+}
+</style>
+
+{% endblock %} 

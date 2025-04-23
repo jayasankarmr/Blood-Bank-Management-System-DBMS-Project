@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0 text-center">Search for Blood Donors</h4>
+                </div>
+                <div class="card-body">
+                    <form class="form-group" action="{{url_for('search')}}" method="POST">
+                        <div class="form-group">
+                            <label for="type" class="form-label">Search by:</label>
+                            <select name="type" class="form-control form-select" id="type" required>
+                                <option value="blood">Blood group</option>
+                                <option value="donorname">Donor name</option>
+                            </select>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="search" class="form-label">Enter search term:</label>
+                            <input class="form-control" type="search" name="search" id="search" placeholder="Enter blood group or donor name" required>
+                        </div>
+                        <div class="text-center mt-4">
+                            <button class="btn btn-danger btn-lg px-5" type="submit">
+                                Search
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if search %}
+    <div class="mt-5">
+        <h4 class="mb-4">Search Results:</h4>
+        <div class="row">
+            {% for s in search %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header bg-danger text-white">
+                        <h5 class="card-title mb-0">{{s["name"]}}</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">{{s['email']}}</h6>
+                        <p class="card-text">
+                            <strong>Blood Group:</strong> {{s['bg']}}<br>
+                            <strong>Address:</strong> {{s["addr"]}}<br>
+                            <strong>City:</strong> {{s["city"]}}<br>
+                            <strong>Pin Code:</strong> {{s['pin']}}
+                        </p>
+                        {% if session['username'] == s['email']%}
+                        <button class="btn btn-primary w-100" disabled>
+                            Contact for blood
+                        </button>
+                        {% elif session['logged_in'] == True %}
+                        <button type="button" class="btn btn-primary w-100" onclick="send_notification_clicked('{{s['email']}}');" data-toggle="modal" data-target="#exampleModalCenter">
+                            Contact for blood
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="mt-5">
+        <h4 class="mb-4">All Registered Donors:</h4>
+        <div class="row">
+            {% for user in all_users %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-header bg-danger text-white">
+                        <h5 class="card-title mb-0">{{user["name"]}}</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">{{user['email']}}</h6>
+                        <p class="card-text">
+                            <strong>Blood Group:</strong> {{user['bg']}}<br>
+                            <strong>Address:</strong> {{user["addr"]}}<br>
+                            <strong>City:</strong> {{user["city"]}}<br>
+                            <strong>Pin Code:</strong> {{user['pin']}}
+                        </p>
+                        {% if session['username'] == user['email']%}
+                        <button class="btn btn-primary w-100" disabled>
+                            Contact for blood
+                        </button>
+                        {% elif session['logged_in'] == True %}
+                        <button type="button" class="btn btn-primary w-100" onclick="send_notification_clicked('{{user['email']}}');" data-toggle="modal" data-target="#exampleModalCenter">
+                            Contact for blood
+                        </button>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Contact for blood</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="contactform" method="POST" action="{{ url_for('contactforblood', emailid='') }}">
+                    <input type="hidden" name="emailid" id="donor_email">
+                    <div class="form-group">
+                        <label for="nm">Name</label>
+                        <input type="text" name="nm" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="add">Confirm your Address</label>
+                        <textarea name="add" class="form-control" required></textarea>
+                    </div>
+                    <div class="text-right mt-4">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function send_notification_clicked(email) {
+    document.getElementById('donor_email').value = email;
+    document.getElementById('contactform').action = "{{ url_for('contactforblood', emailid='') }}" + email;
+}
+</script>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for mess in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {{mess}}
+        </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+{% endblock %} 
